@@ -72,11 +72,6 @@ def add_to_database() -> None:
     roll_off_date_entry.delete(0, tk.END)
 
 
-def close_app() -> None:
-    """Close the application."""
-    root.destroy()
-
-
 # Create the main window
 root = tk.Tk()
 root.title("Data Entry App")
@@ -111,10 +106,6 @@ roll_off_date_entry.grid(row=4, column=1, padx=5, pady=5)
 # Create the "Add to Database" button
 add_button = ttk.Button(root, text="Add to Database", command=add_to_database)
 add_button.grid(row=5, column=0, columnspan=2, padx=5, pady=5)
-
-# Create the close button
-close_button = ttk.Button(root, text="X", command=close_app)
-close_button.grid(row=0, column=2, padx=5, pady=5)
 
 # Run the GUI
 root.mainloop()
