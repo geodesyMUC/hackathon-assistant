@@ -9,6 +9,7 @@ from tkcalendar import DateEntry
 
 
 DATABASE_FILE = "hackathon_user_db.xlsx"
+LABEL_COLOR = "#dadcee"
 
 
 def check_date(date_string: str) -> bool:
@@ -75,30 +76,32 @@ def add_to_database() -> None:
 # Create the main window
 root = tk.Tk()
 root.title("Data Entry App")
-root.configure(bg="#dadcee")
+root.configure(bg=LABEL_COLOR)
 
 # Create labels and entry fields
-id_label = tk.Label(root, text="ID")
+label_style = {"bg": LABEL_COLOR, "fg": "#000000"}
+
+id_label = tk.Label(root, text="ID", **label_style)
 id_label.grid(row=0, column=0, padx=5, pady=5)
 id_entry = ttk.Entry(root)
 id_entry.grid(row=0, column=1, padx=5, pady=5)
 
-last_name_label = tk.Label(root, text="Last Name")
+last_name_label = tk.Label(root, text="Last Name", **label_style)
 last_name_label.grid(row=1, column=0, padx=5, pady=5)
 last_name_entry = ttk.Entry(root)
 last_name_entry.grid(row=1, column=1, padx=5, pady=5)
 
-first_name_label = tk.Label(root, text="First Name")
+first_name_label = tk.Label(root, text="First Name", **label_style)
 first_name_label.grid(row=2, column=0, padx=5, pady=5)
 first_name_entry = ttk.Entry(root)
 first_name_entry.grid(row=2, column=1, padx=5, pady=5)
 
-start_date_label = tk.Label(root, text="Start Date")
+start_date_label = tk.Label(root, text="Start Date", **label_style)
 start_date_label.grid(row=3, column=0, padx=5, pady=5)
 start_date_entry = DateEntry(root, date_pattern="dd.mm.yyyy")
 start_date_entry.grid(row=3, column=1, padx=5, pady=5)
 
-roll_off_date_label = tk.Label(root, text="Roll-off Date")
+roll_off_date_label = tk.Label(root, text="Roll-off Date", **label_style)
 roll_off_date_label.grid(row=4, column=0, padx=5, pady=5)
 roll_off_date_entry = DateEntry(root, date_pattern="dd.mm.yyyy")
 roll_off_date_entry.grid(row=4, column=1, padx=5, pady=5)
