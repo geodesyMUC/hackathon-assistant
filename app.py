@@ -18,7 +18,8 @@ def add_to_database() -> None:
     start_date_value = start_date_entry.get().strip()
     roll_off_date_value = roll_off_date_entry.get().strip()
 
-    if not id_value or not last_name_value or not first_name_value or not start_date_value or not roll_off_date_value:
+    if not id_value or not last_name_value or not first_name_value or \
+            not start_date_value or not roll_off_date_value:
         messagebox.showerror("Error", "All fields must be filled.")
         return
 
