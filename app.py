@@ -60,7 +60,7 @@ def close_app() -> None:
 # Create the main window
 root = tk.Tk()
 root.title("Data Entry App")
-root.configure(bg="light violet")
+root.configure(bg="#dadcee")
 
 # Create labels and entry fields
 id_label = tk.Label(root, text="ID")
