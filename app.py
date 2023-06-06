@@ -1,8 +1,13 @@
+import os
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
 from openpyxl import load_workbook
+from openpyxl import Workbook
 from datetime import datetime
+
+
+DATABASE_FILE = "hackathon_user_db.xlsx"
 
 
 def add_to_database() -> None:
@@ -24,14 +29,21 @@ def add_to_database() -> None:
         messagebox.showerror("Error", "Invalid date format. Please use YYYY-mm-dd.")
         return
 
-    # Open the existing workbook
-    workbook = load_workbook("hackathon_user_db.xlsx")
-    sheet = workbook.active
+    # Create a new workbook if the file doesn't exist
+    if not os.path.isfile(DATABASE_FILE):
+        workbook = Workbook()
+        sheet = workbook.active
+        sheet.title = "User Data"
+        # Write header row
+        header = ["ID", "Last Name", "First Name", "Start Date", "Roll-off Date"]
+        sheet.append(header)
+    else:
+        # Open the existing workbook
+        workbook = load_workbook(DATABASE_FILE)
+        sheet = workbook.active
 
     # Find the first empty row
-    row = 1
-    while sheet.cell(row=row, column=1).value:
-        row += 1
+    row = sheet.max_row + 1
 
     # Write the textbox contents to the Excel file
     sheet.cell(row=row, column=1).value = id_value
@@ -41,7 +53,7 @@ def add_to_database() -> None:
     sheet.cell(row=row, column=5).value = roll_off_date_value
 
     # Save the workbook
-    workbook.save("hackathon_user_db.xlsx")
+    workbook.save(DATABASE_FILE)
     messagebox.showinfo("Success", "Data added to the database.")
 
     # Clear the textboxes
