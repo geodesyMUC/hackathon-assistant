@@ -5,9 +5,19 @@ from tkinter import ttk
 from openpyxl import load_workbook
 from openpyxl import Workbook
 from datetime import datetime
+from tkcalendar import DateEntry
 
 
 DATABASE_FILE = "hackathon_user_db.xlsx"
+
+
+def check_date(date_string: str) -> bool:
+    """Check if the input date is valid."""
+    try:
+        datetime.strptime(date_string, "%d.%m.%Y")
+        return True
+    except ValueError:
+        return False
 
 
 def add_to_database() -> None:
@@ -15,19 +25,16 @@ def add_to_database() -> None:
     id_value = id_entry.get().strip()
     last_name_value = last_name_entry.get().strip()
     first_name_value = first_name_entry.get().strip()
-    start_date_value = start_date_entry.get().strip()
-    roll_off_date_value = roll_off_date_entry.get().strip()
+    start_date_value = start_date_entry.get_date().strftime("%d.%m.%Y")
+    roll_off_date_value = roll_off_date_entry.get_date().strftime("%d.%m.%Y")
 
     if not id_value or not last_name_value or not first_name_value or \
             not start_date_value or not roll_off_date_value:
         messagebox.showerror("Error", "All fields must be filled.")
         return
 
-    try:
-        datetime.strptime(start_date_value, "%Y-%m-%d")
-        datetime.strptime(roll_off_date_value, "%Y-%m-%d")
-    except ValueError:
-        messagebox.showerror("Error", "Invalid date format. Please use YYYY-mm-dd.")
+    if not check_date(start_date_value) or not check_date(roll_off_date_value):
+        messagebox.showerror("Error", "Invalid date format. Please use dd.mm.YYYY.")
         return
 
     # Create a new workbook if the file doesn't exist
@@ -93,12 +100,12 @@ first_name_entry.grid(row=2, column=1, padx=5, pady=5)
 
 start_date_label = tk.Label(root, text="Start Date")
 start_date_label.grid(row=3, column=0, padx=5, pady=5)
-start_date_entry = ttk.Entry(root)
+start_date_entry = DateEntry(root, date_pattern="dd.mm.yyyy")
 start_date_entry.grid(row=3, column=1, padx=5, pady=5)
 
 roll_off_date_label = tk.Label(root, text="Roll-off Date")
 roll_off_date_label.grid(row=4, column=0, padx=5, pady=5)
-roll_off_date_entry = ttk.Entry(root)
+roll_off_date_entry = DateEntry(root, date_pattern="dd.mm.yyyy")
 roll_off_date_entry.grid(row=4, column=1, padx=5, pady=5)
 
 # Create the "Add to Database" button
