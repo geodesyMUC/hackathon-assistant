@@ -5,7 +5,8 @@ from openpyxl import load_workbook
 from datetime import datetime
 
 
-def add_to_database():
+def add_to_database() -> None:
+    """Add the textbox contents to the database."""
     id_value = id_entry.get().strip()
     last_name_value = last_name_entry.get().strip()
     first_name_value = first_name_entry.get().strip()
@@ -51,15 +52,15 @@ def add_to_database():
     roll_off_date_entry.delete(0, tk.END)
 
 
-def close_app():
-    # Close the GUI window and stop the script
+def close_app() -> None:
+    """Close the application."""
     root.destroy()
 
 
 # Create the main window
 root = tk.Tk()
-root.title("Hackathon 2023 Assistant App 😀👍")
-root.configure(bg="#DADCEE")
+root.title("Data Entry App")
+root.configure(bg="light violet")
 
 # Create labels and entry fields
 id_label = tk.Label(root, text="ID")
