@@ -4,3 +4,6 @@
 
 # the database
 hackathon_user_db.xlsx
+
+# misc
+*.xlsx#
